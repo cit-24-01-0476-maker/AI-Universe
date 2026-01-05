@@ -3,246 +3,374 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Hub - Free Access</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>AI Nexus - Premium Access Hub</title>
     
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
     <style>
+        /* --- DESIGN SYSTEM --- */
         :root {
-            --bg-color: #0f172a;
-            --sidebar-bg: #1e293b;
-            --chat-bg: #0f172a;
-            --msg-user: #3b82f6;
-            --msg-ai: #334155;
-            --text-color: #f8fafc;
+            --bg-dark: #050511;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --vip-glow: #ffd700; /* Gold for Premium */
+            --primary: #00f2fe;
+            --secondary: #4facfe;
+            --text-white: #ffffff;
+            --text-gray: #94a3b8;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+            scroll-behavior: smooth;
+        }
 
         body {
-            display: flex;
-            height: 100vh;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            overflow: hidden;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* Sidebar */
-        .sidebar {
-            width: 260px;
-            background-color: var(--sidebar-bg);
-            padding: 20px;
+        /* Animated Background */
+        .bg-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(79, 172, 254, 0.15) 0%, transparent 70%);
+            top: -100px;
+            left: -100px;
+            z-index: -1;
+            filter: blur(80px);
+            animation: float 10s infinite alternate;
+        }
+        .bg-glow-2 {
+            top: auto;
+            bottom: -100px;
+            right: -100px;
+            background: radial-gradient(circle, rgba(255, 0, 85, 0.1) 0%, transparent 70%);
+            animation-delay: -5s;
+        }
+
+        @keyframes float { 0% { transform: translate(0,0); } 100% { transform: translate(50px,50px); } }
+
+        /* Navbar */
+        nav {
             display: flex;
-            flex-direction: column;
-            border-right: 1px solid rgba(255,255,255,0.1);
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 5%;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(5, 5, 17, 0.8);
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 30px;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #fff, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .model-btn {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #94a3b8;
-            padding: 12px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            cursor: pointer;
+        /* --- VIP SECTION (YOUR ACCOUNTS) --- */
+        .vip-section {
+            padding: 60px 20px;
+            max-width: 1300px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            display: inline-block;
+        }
+
+        .section-title span {
+            color: var(--vip-glow);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .vip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .vip-card {
+            background: linear-gradient(145deg, rgba(255, 215, 0, 0.05), rgba(0,0,0,0.4));
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            transition: 0.4s;
+            overflow: hidden;
             text-align: left;
+        }
+
+        .vip-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
+            border-color: var(--vip-glow);
+        }
+
+        .vip-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--vip-glow);
+            color: #000;
+            font-weight: 800;
+            font-size: 0.7rem;
+            padding: 5px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .vip-icon {
+            font-size: 2.5rem;
+            color: var(--vip-glow);
+            margin-bottom: 20px;
+        }
+
+        .access-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background: var(--vip-glow);
+            color: #000;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 12px;
             transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        .model-btn:hover, .model-btn.active {
-            background: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
+        .access-btn:hover {
+            background: white;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
         }
 
-        /* Chat Area */
-        .chat-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+        /* --- DIRECTORY SECTION --- */
+        .directory-section {
+            padding: 40px 20px 100px;
+            max-width: 1300px;
+            margin: 0 auto;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        /* Search Bar */
+        .search-container {
+            max-width: 700px;
+            margin: 0 auto 50px;
             position: relative;
         }
 
-        .chat-header {
-            padding: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            font-weight: 600;
-        }
-
-        .chat-box {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .message {
-            max-width: 70%;
-            padding: 12px 18px;
-            border-radius: 15px;
-            line-height: 1.5;
-            font-size: 0.95rem;
-        }
-
-        .user-msg {
-            align-self: flex-end;
-            background-color: var(--msg-user);
+        .search-input {
+            width: 100%;
+            padding: 18px 50px;
+            border-radius: 50px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             color: white;
-            border-bottom-right-radius: 2px;
-        }
-
-        .ai-msg {
-            align-self: flex-start;
-            background-color: var(--msg-ai);
-            color: #e2e8f0;
-            border-bottom-left-radius: 2px;
-        }
-
-        /* Input Area */
-        .input-area {
-            padding: 20px;
-            background-color: var(--sidebar-bg);
-            display: flex;
-            gap: 10px;
-        }
-
-        .input-area input {
-            flex: 1;
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: #0f172a;
-            color: white;
+            font-size: 1.1rem;
             outline: none;
         }
 
-        .send-btn {
-            background: #3b82f6;
-            color: white;
-            border: none;
-            padding: 0 25px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1.2rem;
+        .search-input:focus {
+            border-color: var(--primary);
+            background: rgba(255,255,255,0.05);
         }
 
+        /* Normal Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 25px;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            background: rgba(255,255,255,0.06);
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .icon-box {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+        }
+
+        .card h3 { font-size: 1.1rem; }
+        .card p { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 20px; flex-grow: 1; }
+        
+        .visit-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-gray);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        @media (max-width: 768px) {
+            .section-title { font-size: 2rem; }
+            .vip-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="sidebar">
-        <div class="logo"><i class="fa-solid fa-robot"></i> AI Hub Pro</div>
-        
-        <p style="color:#64748b; font-size:0.8rem; margin-bottom:10px;">SELECT MODEL</p>
-        
-        <button class="model-btn active" onclick="selectModel('GPT-4o')">
-            <i class="fa-solid fa-bolt"></i> ChatGPT 4o
-        </button>
-        <button class="model-btn" onclick="selectModel('Gemini Pro')">
-            <i class="fa-brands fa-google"></i> Gemini Pro 1.5
-        </button>
-        <button class="model-btn" onclick="selectModel('Perplexity')">
-            <i class="fa-solid fa-search"></i> Perplexity
-        </button>
-    </div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
 
-    <div class="chat-container">
-        <div class="chat-header" id="headerTitle">Current Model: ChatGPT 4o</div>
-        
-        <div class="chat-box" id="chatBox">
-            <div class="message ai-msg">
-                Hello! I am connected to your premium AI accounts. Select a model from the left and ask me anything.
+    <nav>
+        <div class="logo">AI NEXUS</div>
+        <a href="#" style="color:white; text-decoration:none;"><i class="fa-brands fa-github"></i> &nbsp;GitHub</a>
+    </nav>
+
+    <section class="vip-section">
+        <h2 class="section-title">Premium Access <span>Unlocked</span></h2>
+        <p style="color:var(--text-gray); margin-bottom: 40px;">
+            Enjoy free access to world-class AI models through our community hub.
+        </p>
+
+        <div class="vip-grid">
+            <div class="vip-card">
+                <span class="vip-badge">Premium</span>
+                <i class="fa-solid fa-bolt vip-icon"></i>
+                <h3>ChatGPT 4o</h3>
+                <p style="color:#ccc; margin:10px 0;">Access the smartest model by OpenAI. Full reasoning and creative capabilities enabled.</p>
+                
+                <a href="YOUR_CHATGPT_LINK_HERE" target="_blank" class="access-btn">
+                    Launch GPT-4o <i class="fa-solid fa-rocket"></i>
+                </a>
+            </div>
+
+            <div class="vip-card">
+                <span class="vip-badge">Pro 1.5</span>
+                <i class="fa-brands fa-google vip-icon"></i>
+                <h3>Gemini Advanced</h3>
+                <p style="color:#ccc; margin:10px 0;">Google's most capable AI. Multi-modal processing for text, images, and code.</p>
+                
+                <a href="YOUR_GEMINI_LINK_HERE" target="_blank" class="access-btn">
+                    Launch Gemini <i class="fa-solid fa-rocket"></i>
+                </a>
+            </div>
+
+            <div class="vip-card">
+                <span class="vip-badge">Pro Search</span>
+                <i class="fa-solid fa-magnifying-glass-chart vip-icon"></i>
+                <h3>Perplexity AI</h3>
+                <p style="color:#ccc; margin:10px 0;">Real-time search engine capability with deep research and citation features.</p>
+                
+                <a href="YOUR_PERPLEXITY_LINK_HERE" target="_blank" class="access-btn">
+                    Launch Perplexity <i class="fa-solid fa-rocket"></i>
+                </a>
             </div>
         </div>
+    </section>
 
-        <div class="input-area">
-            <input type="text" id="userInput" placeholder="Type your message here...">
-            <button class="send-btn" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+
+    <section class="directory-section">
+        <div style="text-align:center; margin-bottom:30px;">
+            <h2>Explore Other Tools</h2>
+            <p style="color:var(--text-gray);">Browse the full collection of AI resources</p>
         </div>
-    </div>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search any AI tool...">
+            <i class="fa-solid fa-search" style="position:absolute; right:20px; top:20px; color:#aaa;"></i>
+        </div>
+
+        <div class="grid" id="aiGrid">
+            </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 AI Nexus Community. Built for Everyone.</p>
+    </footer>
 
     <script>
-        let currentModel = 'GPT-4o';
+        // Database of Normal Tools
+        const aiTools = [
+            { name: "Midjourney", cat: "Image", desc: "Generate hyper-realistic art via Discord.", url: "https://midjourney.com", icon: "fa-paintbrush" },
+            { name: "Runway ML", cat: "Video", desc: "Advanced video generation and editing suite.", url: "https://runwayml.com", icon: "fa-video" },
+            { name: "GitHub Copilot", cat: "Code", desc: "Your AI pair programmer.", url: "https://github.com/features/copilot", icon: "fa-github" },
+            { name: "ElevenLabs", cat: "Audio", desc: "Realistic AI voice generator.", url: "https://elevenlabs.io", icon: "fa-microphone" },
+            { name: "Claude 3", cat: "Chat", desc: "Anthropic's helpful and honest AI assistant.", url: "https://claude.ai", icon: "fa-robot" },
+            { name: "Sora", cat: "Video", desc: "Text-to-video model by OpenAI.", url: "https://openai.com/sora", icon: "fa-film" },
+            { name: "Leonardo.ai", cat: "Image", desc: "Creative studio for AI art generation.", url: "https://leonardo.ai", icon: "fa-palette" },
+            { name: "Replit", cat: "Code", desc: "Collaborative browser-based IDE with AI.", url: "https://replit.com", icon: "fa-code" }
+        ];
 
-        function selectModel(model) {
-            currentModel = model;
-            document.getElementById('headerTitle').innerText = `Current Model: ${model}`;
-            
-            // Highlight active button
-            document.querySelectorAll('.model-btn').forEach(btn => btn.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-            
-            // Optional: Clear chat or show model switch message
-            addMessage('ai', `Switched to ${model}. How can I help?`);
+        const grid = document.getElementById('aiGrid');
+        const searchInput = document.getElementById('searchInput');
+
+        function renderCards(tools) {
+            grid.innerHTML = '';
+            tools.forEach(tool => {
+                grid.innerHTML += `
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="icon-box"><i class="fa-solid ${tool.icon}"></i></div>
+                            <div>
+                                <h3>${tool.name}</h3>
+                                <span style="font-size:0.75rem; color:var(--secondary);">${tool.cat}</span>
+                            </div>
+                        </div>
+                        <p>${tool.desc}</p>
+                        <a href="${tool.url}" target="_blank" class="visit-link">Visit Official Site &rarr;</a>
+                    </div>
+                `;
+            });
         }
 
-        function sendMessage() {
-            const input = document.getElementById('userInput');
-            const text = input.value.trim();
-            if (!text) return;
-
-            // 1. Show User Message
-            addMessage('user', text);
-            input.value = '';
-
-            // 2. Simulate AI Response (Here you need API connection)
-            showTypingIndicator();
-
-            setTimeout(() => {
-                // ME TIKATA THAMAI API CONNECT KARANNA ONE
-                let response = "";
-                if(currentModel === 'GPT-4o') response = "This is a simulated response from ChatGPT 4o.";
-                else if(currentModel === 'Gemini Pro') response = "This is a simulated response from Gemini Pro.";
-                else response = "This is a simulated response from Perplexity.";
-
-                removeTypingIndicator();
-                addMessage('ai', response);
-            }, 1500);
-        }
-
-        function addMessage(sender, text) {
-            const box = document.getElementById('chatBox');
-            const div = document.createElement('div');
-            div.className = `message ${sender}-msg`;
-            div.innerText = text;
-            box.appendChild(div);
-            box.scrollTop = box.scrollHeight;
-        }
-
-        function showTypingIndicator() {
-            const box = document.getElementById('chatBox');
-            const div = document.createElement('div');
-            div.className = 'message ai-msg';
-            div.id = 'typing';
-            div.innerText = 'Thinking...';
-            box.appendChild(div);
-            box.scrollTop = box.scrollHeight;
-        }
-
-        function removeTypingIndicator() {
-            const typing = document.getElementById('typing');
-            if(typing) typing.remove();
-        }
-
-        // Allow Enter key to send
-        document.getElementById('userInput').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') sendMessage();
+        searchInput.addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase();
+            const filtered = aiTools.filter(t => t.name.toLowerCase().includes(val) || t.desc.toLowerCase().includes(val));
+            renderCards(filtered);
         });
+
+        // Init
+        renderCards(aiTools);
     </script>
 </body>
 </html>
