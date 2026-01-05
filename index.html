@@ -3,59 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Universe - The Ultimate AI Directory</title>
+    <title>AI Nexus Pro | Premium AI Directory</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <style>
-        /* --- CSS STYLES --- */
+        /* --- PREMIUM CSS VARIABLES --- */
         :root {
-            --primary-color: #00f2fe;
-            --secondary-color: #4facfe;
-            --accent-color: #ff0055;
-            --bg-color: #080a10;
-            --card-bg: rgba(22, 27, 46, 0.7);
-            --text-white: #ffffff;
-            --text-gray: #a0a0a0;
-            --border-color: rgba(255, 255, 255, 0.1);
+            --bg-dark: #030014;
+            --card-glass: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --primary-glow: #7000ff;
+            --secondary-glow: #00c6ff;
+            --text-main: #ffffff;
+            --text-muted: #9ca3af;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-white);
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(79, 172, 254, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(255, 0, 85, 0.08) 0%, transparent 20%);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
             min-height: 100vh;
+            position: relative;
         }
 
-        /* Navbar */
+        /* --- BACKGROUND ANIMATION --- */
+        .background-blobs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.4;
+            border-radius: 50%;
+            animation: float 10s infinite alternate;
+        }
+
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--primary-glow); }
+        .blob-2 { bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: var(--secondary-glow); animation-delay: -5s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 50px); }
+        }
+
+        /* --- NAVBAR --- */
         nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            background: rgba(15, 15, 25, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 1px solid var(--card-border);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
-            background: rgba(8, 10, 16, 0.8);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
             z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, #a5a5a5 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: flex;
@@ -63,181 +95,211 @@
             gap: 10px;
         }
 
-        .submit-btn {
-            padding: 10px 20px;
-            border-radius: 30px;
-            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
-            color: #000;
-            font-weight: 600;
-            text-decoration: none;
-            transition: 0.3s;
+        .nav-btn {
+            background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
             border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
             cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
         }
 
-        .submit-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+        .nav-btn:hover {
+            opacity: 0.9;
+            box-shadow: 0 0 20px rgba(112, 0, 255, 0.4);
         }
 
-        /* Hero Section */
+        /* --- HERO SECTION --- */
         .hero {
             text-align: center;
-            padding: 80px 20px 40px;
+            padding: 180px 20px 60px;
+            position: relative;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
+            line-height: 1.1;
+            font-weight: 800;
             margin-bottom: 20px;
-            line-height: 1.2;
+            background: linear-gradient(to right, #fff, #b0b0b0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255,255,255,0.1);
         }
 
-        .hero span {
-            color: var(--secondary-color);
+        .hero h1 span {
+            background: linear-gradient(to right, var(--secondary-glow), var(--primary-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            color: var(--text-gray);
             font-size: 1.2rem;
+            color: var(--text-muted);
             max-width: 600px;
             margin: 0 auto 40px;
         }
 
-        /* Search & Filter Bar */
-        .controls {
-            max-width: 900px;
-            margin: 0 auto 50px;
+        /* --- SEARCH & FILTERS --- */
+        .controls-container {
+            max-width: 800px;
+            margin: 0 auto 60px;
             padding: 0 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            align-items: center;
         }
 
-        .search-wrapper {
+        .search-bar {
             position: relative;
-            width: 100%;
-            max-width: 600px;
+            margin-bottom: 25px;
         }
 
-        .search-wrapper input {
+        .search-bar input {
             width: 100%;
-            padding: 18px 50px;
-            border-radius: 50px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            padding: 20px 60px;
+            border-radius: 20px;
             color: white;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            backdrop-filter: blur(10px);
             outline: none;
             transition: 0.3s;
         }
 
-        .search-wrapper input:focus {
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 20px rgba(79, 172, 254, 0.15);
+        .search-bar input:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--secondary-glow);
+            box-shadow: 0 0 20px rgba(0, 198, 255, 0.2);
         }
 
-        .search-wrapper i {
+        .search-bar i {
             position: absolute;
-            left: 20px;
+            left: 25px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-gray);
+            color: var(--text-muted);
+            font-size: 1.2rem;
         }
 
-        .filter-buttons {
+        .filters {
             display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
             justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
         .filter-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            color: var(--text-gray);
-            padding: 8px 20px;
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 10px 24px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: 0.3s;
         }
 
         .filter-btn:hover, .filter-btn.active {
-            background: var(--secondary-color);
-            color: #000;
-            font-weight: 600;
-            border-color: var(--secondary-color);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: var(--secondary-glow);
+            box-shadow: 0 0 15px rgba(0, 198, 255, 0.2);
         }
 
-        /* Grid Layout */
+        /* --- GRID SYSTEM --- */
         .container {
-            max-width: 1280px;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 0 20px 80px;
+            padding: 0 20px 100px;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
             gap: 30px;
         }
 
-        /* Card Design */
+        /* --- HIGH CLASS CARD DESIGN --- */
         .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 25px;
-            transition: 0.3s ease;
+            background: var(--card-glass);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 30px;
             position: relative;
             overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
             display: flex;
             flex-direction: column;
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--secondary-color);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
         }
 
-        .card-top {
+        /* Neon Glow on Hover */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-header {
             display: flex;
             justify-content: space-between;
-            align-items: start;
+            align-items: flex-start;
             margin-bottom: 20px;
         }
 
-        .icon-box {
+        .icon-wrapper {
             width: 60px;
             height: 60px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.01));
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.8rem;
-            color: var(--secondary-color);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .category-tag {
+        .badge {
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            padding: 5px 12px;
-            border-radius: 10px;
-            background: rgba(79, 172, 254, 0.1);
-            color: var(--secondary-color);
-            border: 1px solid rgba(79, 172, 254, 0.2);
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: rgba(112, 0, 255, 0.15);
+            color: #d8b4fe;
+            border: 1px solid rgba(112, 0, 255, 0.3);
+            font-weight: 700;
         }
 
         .card h3 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             margin-bottom: 10px;
+            font-weight: 700;
         }
 
         .card p {
-            color: var(--text-gray);
+            color: var(--text-muted);
             font-size: 0.95rem;
             line-height: 1.6;
             margin-bottom: 25px;
@@ -245,69 +307,74 @@
         }
 
         .visit-btn {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            width: 100%;
-            padding: 12px;
-            background: var(--text-white);
-            color: #000;
+            display: block;
+            text-align: center;
+            background: rgba(255,255,255,0.05);
+            color: white;
             text-decoration: none;
-            border-radius: 12px;
+            padding: 14px;
+            border-radius: 16px;
             font-weight: 600;
             transition: 0.3s;
+            border: 1px solid var(--card-border);
         }
 
         .visit-btn:hover {
-            background: var(--primary-color);
-            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.3);
+            background: white;
+            color: black;
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
         }
 
-        /* Footer */
+        /* --- FOOTER --- */
         footer {
+            border-top: 1px solid var(--card-border);
             text-align: center;
             padding: 40px;
-            color: var(--text-gray);
-            border-top: 1px solid var(--border-color);
-            font-size: 0.9rem;
+            color: var(--text-muted);
+            background: rgba(0,0,0,0.3);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
+            nav { width: 95%; padding: 15px 20px; }
             .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
     <nav>
         <div class="logo">
-            <i class="fa-solid fa-atom"></i> AI Universe
+            <i class="fa-solid fa-layer-group" style="color: var(--secondary-glow)"></i> AI NEXUS
         </div>
-        <a href="https://github.com/login" target="_blank" class="submit-btn">
-            <i class="fa-brands fa-github"></i> Host This
+        <a href="https://github.com/your-repo" target="_blank" class="nav-btn">
+            <i class="fa-brands fa-github"></i> Host on GitHub
         </a>
     </nav>
 
     <section class="hero">
-        <h1>Discover the Future of <br><span>Artificial Intelligence</span></h1>
-        <p>A curated library of the most powerful AI tools available today. Updated daily.</p>
+        <h1>Unlock the Power of <br><span>Next-Gen AI</span></h1>
+        <p>A curated universe of the world's most advanced Artificial Intelligence tools. Designed for creators, developers, and visionaries.</p>
     </section>
 
-    <section class="controls">
-        <div class="search-wrapper">
+    <section class="controls-container">
+        <div class="search-bar">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="Search for tools (e.g. Gemini, Coding, Video)...">
+            <input type="text" id="searchInput" placeholder="Search AI tools (e.g. Gemini, Video, Coding)...">
         </div>
-        <div class="filter-buttons">
-            <button class="filter-btn active" onclick="filterAI('all')">All Tools</button>
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterAI('all')">All</button>
             <button class="filter-btn" onclick="filterAI('Chat')">ChatBots</button>
             <button class="filter-btn" onclick="filterAI('Image')">Image Gen</button>
             <button class="filter-btn" onclick="filterAI('Video')">Video</button>
             <button class="filter-btn" onclick="filterAI('Code')">Coding</button>
-            <button class="filter-btn" onclick="filterAI('Productivity')">Productivity</button>
+            <button class="filter-btn" onclick="filterAI('Audio')">Audio</button>
         </div>
     </section>
 
@@ -317,95 +384,81 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 AI Universe. Designed for the Future.</p>
+        <p>© 2026 AI Nexus Pro. Crafted with precision.</p>
     </footer>
 
     <script>
-        // === 1. DATABASE (ඔබට අවශ්‍ය දත්ත මෙතනට ඇතුලත් කරන්න) ===
+        // High Class Data Set
         const aiTools = [
             {
-                name: "ChatGPT",
+                name: "ChatGPT 4o",
                 category: "Chat",
-                desc: "OpenAI's industry-leading conversational AI model for writing, coding, and assistance.",
+                desc: "The latest flagship model from OpenAI. Faster, smarter, and multimodal capabilities.",
                 url: "https://chat.openai.com",
-                icon: "fa-solid fa-message"
+                icon: "fa-solid fa-bolt"
             },
             {
-                name: "Gemini",
+                name: "Gemini Advanced",
                 category: "Chat",
-                desc: "Google's multimodal AI. Capable of understanding text, images, video, and audio.",
+                desc: "Google’s most capable AI. Seamlessly integrates with the Google ecosystem.",
                 url: "https://gemini.google.com",
                 icon: "fa-brands fa-google"
             },
             {
-                name: "Midjourney",
+                name: "Midjourney v6",
                 category: "Image",
-                desc: "The gold standard for artistic AI image generation via Discord prompts.",
+                desc: "Unmatched photorealism and artistic control for generating images via prompts.",
                 url: "https://www.midjourney.com",
                 icon: "fa-solid fa-paintbrush"
             },
             {
                 name: "GitHub Copilot",
                 category: "Code",
-                desc: "Your AI pair programmer. Turns natural language prompts into coding suggestions.",
+                desc: "The world's most widely adopted AI developer tool. Code faster with confidence.",
                 url: "https://github.com/features/copilot",
                 icon: "fa-brands fa-github"
             },
             {
-                name: "Runway Gen-2",
+                name: "Runway Gen-3",
                 category: "Video",
-                desc: "Turn text into video. A complete AI video editing and generation suite.",
+                desc: "Cinematic video generation. Create realistic video clips from text descriptions.",
                 url: "https://runwayml.com",
                 icon: "fa-solid fa-film"
             },
             {
-                name: "Notion AI",
-                category: "Productivity",
-                desc: "Integrated AI assistant for notes, docs, and project management workspaces.",
-                url: "https://www.notion.so/product/ai",
-                icon: "fa-solid fa-bolt"
-            },
-            {
-                name: "Leonardo.ai",
-                category: "Image",
-                desc: "Generate production-quality assets for creative projects with high control.",
-                url: "https://leonardo.ai",
-                icon: "fa-solid fa-palette"
-            },
-            {
-                name: "Claude 3",
+                name: "Claude 3 Opus",
                 category: "Chat",
-                desc: "Anthropic's secure and high-context window AI for enterprise tasks.",
+                desc: "Strong reasoning, math, and coding capabilities with a massive context window.",
                 url: "https://claude.ai",
-                icon: "fa-solid fa-robot"
+                icon: "fa-solid fa-brain"
             },
             {
                 name: "ElevenLabs",
-                category: "Productivity",
-                desc: "The most realistic AI voice generator and text-to-speech software.",
+                category: "Audio",
+                desc: "The most realistic AI voice generator. Clone voices and generate speech instantly.",
                 url: "https://elevenlabs.io",
                 icon: "fa-solid fa-microphone-lines"
             },
             {
                 name: "Sora",
                 category: "Video",
-                desc: "OpenAI's text-to-video model that can create realistic and imaginative scenes.",
+                desc: "OpenAI's groundbreaking text-to-video model enabling complex camera motions.",
                 url: "https://openai.com/sora",
                 icon: "fa-solid fa-video"
             },
             {
-                name: "Replit Ghostwriter",
-                category: "Code",
-                desc: "An AI-powered pair programmer built directly into the Replit online IDE.",
-                url: "https://replit.com",
-                icon: "fa-solid fa-code"
+                name: "Perplexity",
+                category: "Chat",
+                desc: "A conversational search engine that gives you accurate answers with sources.",
+                url: "https://www.perplexity.ai",
+                icon: "fa-solid fa-magnifying-glass-chart"
             },
-            {
-                name: "Canva Magic",
-                category: "Image",
-                desc: "AI design tools integrated into Canva for instant image editing and generation.",
-                url: "https://www.canva.com",
-                icon: "fa-solid fa-pen-nib"
+             {
+                name: "Cursor",
+                category: "Code",
+                desc: "The AI-first code editor. Built to make pair programming with AI seamless.",
+                url: "https://cursor.sh",
+                icon: "fa-solid fa-laptop-code"
             }
         ];
 
@@ -413,84 +466,79 @@
         const searchInput = document.getElementById('searchInput');
         const filterBtns = document.querySelectorAll('.filter-btn');
 
-        // === 2. Function to Render Cards ===
-        function displayTools(tools) {
+        function renderTools(tools) {
             grid.innerHTML = '';
             
-            if (tools.length === 0) {
-                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-gray);">No AI tools found matching your search.</div>';
+            if(tools.length === 0) {
+                grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:50px; color:rgba(255,255,255,0.5);">No results found.</div>';
                 return;
             }
 
-            tools.forEach(tool => {
-                const cardHTML = `
-                    <div class="card">
-                        <div class="card-top">
-                            <div class="icon-box">
+            tools.forEach((tool, index) => {
+                // Staggered Animation Delay
+                const delay = index * 100;
+                
+                const card = `
+                    <div class="card" style="animation: fadeUp 0.6s ease forwards ${delay}ms; opacity: 0; transform: translateY(20px);">
+                        <div class="card-header">
+                            <div class="icon-wrapper">
                                 <i class="${tool.icon}"></i>
                             </div>
-                            <span class="category-tag">${tool.category}</span>
+                            <span class="badge">${tool.category}</span>
                         </div>
                         <h3>${tool.name}</h3>
                         <p>${tool.desc}</p>
                         <a href="${tool.url}" target="_blank" class="visit-btn">
-                            Visit Website <i class="fa-solid fa-arrow-right"></i>
+                            Visit Site <i class="fa-solid fa-arrow-right-long" style="margin-left:5px;"></i>
                         </a>
                     </div>
                 `;
-                grid.innerHTML += cardHTML;
+                grid.innerHTML += card;
             });
         }
 
-        // === 3. Filtering Logic ===
+        // Add Keyframes for JS animation
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = `
+            @keyframes fadeUp {
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+
         function filterAI(category) {
-            // Button Styles
             filterBtns.forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
 
-            // Data Filter
             const searchTerm = searchInput.value.toLowerCase();
-            
-            const filteredDocs = aiTools.filter(tool => {
+            const filtered = aiTools.filter(tool => {
                 const matchCat = category === 'all' || tool.category === category;
                 const matchSearch = tool.name.toLowerCase().includes(searchTerm) || 
                                     tool.desc.toLowerCase().includes(searchTerm);
                 return matchCat && matchSearch;
             });
-
-            displayTools(filteredDocs);
+            renderTools(filtered);
         }
 
-        // === 4. Search Logic ===
         searchInput.addEventListener('input', (e) => {
-            const activeBtn = document.querySelector('.filter-btn.active');
-            // Extract category from button text mapping
-            let currentCat = activeBtn.innerText;
-            
-            // Map Button Text to Category Key
-            if(currentCat === 'All Tools') currentCat = 'all';
-            else if(currentCat === 'ChatBots') currentCat = 'Chat';
-            else if(currentCat === 'Image Gen') currentCat = 'Image';
-            
-            // If the category name matches exactly (Video, Code) keep it, else clean it
-            if(!['all', 'Chat', 'Image'].includes(currentCat)) {
-                 currentCat = currentCat; 
-            }
+            const activeCat = document.querySelector('.filter-btn.active').innerText;
+            // Simple mapping - in a real app this would be cleaner
+            let catKey = activeCat === 'All' ? 'all' : 
+                         activeCat === 'ChatBots' ? 'Chat' : 
+                         activeCat === 'Image Gen' ? 'Image' : activeCat;
 
             const searchTerm = e.target.value.toLowerCase();
-
-            const filteredDocs = aiTools.filter(tool => {
-                const matchCat = currentCat === 'all' || tool.category === currentCat;
+            const filtered = aiTools.filter(tool => {
+                const matchCat = catKey === 'all' || tool.category === catKey;
                 const matchSearch = tool.name.toLowerCase().includes(searchTerm) || 
                                     tool.desc.toLowerCase().includes(searchTerm);
                 return matchCat && matchSearch;
             });
-
-            displayTools(filteredDocs);
+            renderTools(filtered);
         });
 
-        // Initialize
-        displayTools(aiTools);
+        // Initial Render
+        renderTools(aiTools);
 
     </script>
 </body>
