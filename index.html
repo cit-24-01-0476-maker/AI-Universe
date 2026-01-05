@@ -3,204 +3,265 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Nexus - Premium Access Hub</title>
+    <title>AI Nexus | Ultimate Command Center</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <style>
-        /* --- DESIGN SYSTEM --- */
+        /* --- ULTIMATE THEME VARIABLES --- */
         :root {
-            --bg-dark: #050511;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --vip-glow: #ffd700; /* Gold for Premium */
-            --primary: #00f2fe;
-            --secondary: #4facfe;
-            --text-white: #ffffff;
-            --text-gray: #94a3b8;
+            --bg-core: #030014;
+            --glass-panel: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            
+            /* Neon Colors */
+            --neon-gold: #FFD700;
+            --neon-blue: #00f2fe;
+            --neon-purple: #bd00ff;
+            --neon-green: #00ff9d;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Outfit', sans-serif;
-            scroll-behavior: smooth;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-white);
+            background-color: var(--bg-core);
+            color: var(--text-main);
             overflow-x: hidden;
             min-height: 100vh;
         }
 
-        /* Animated Background */
-        .bg-glow {
+        /* --- ANIMATED NEBULA BACKGROUND --- */
+        .nebula {
             position: fixed;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(79, 172, 254, 0.15) 0%, transparent 70%);
-            top: -100px;
-            left: -100px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -1;
-            filter: blur(80px);
-            animation: float 10s infinite alternate;
+            filter: blur(100px);
+            opacity: 0.4;
         }
-        .bg-glow-2 {
-            top: auto;
-            bottom: -100px;
-            right: -100px;
-            background: radial-gradient(circle, rgba(255, 0, 85, 0.1) 0%, transparent 70%);
-            animation-delay: -5s;
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite alternate;
         }
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--neon-purple); }
+        .blob-2 { bottom: -10%; right: -10%; width: 40vw; height: 40vw; background: var(--neon-blue); animation-delay: -5s; }
+        .blob-3 { top: 40%; left: 40%; width: 30vw; height: 30vw; background: rgba(255, 0, 100, 0.3); animation-delay: -10s; }
 
-        @keyframes float { 0% { transform: translate(0,0); } 100% { transform: translate(50px,50px); } }
+        @keyframes float { 0% { transform: translate(0,0) rotate(0deg); } 100% { transform: translate(50px,50px) rotate(20deg); } }
 
-        /* Navbar */
+        /* --- NEWS TICKER --- */
+        .news-ticker {
+            background: rgba(0,0,0,0.6);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 8px 0;
+            font-size: 0.85rem;
+            color: var(--neon-blue);
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            z-index: 1001;
+        }
+        .ticker-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+            padding-left: 100%;
+        }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+
+        /* --- NAVBAR --- */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 25px 5%;
-            backdrop-filter: blur(10px);
+            padding: 20px 5%;
+            backdrop-filter: blur(15px);
+            background: rgba(3, 0, 20, 0.6);
             border-bottom: 1px solid var(--glass-border);
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(5, 5, 17, 0.8);
         }
 
-        .logo {
+        .brand {
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(to right, #fff, #4facfe);
+            font-weight: 700;
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .brand i { color: var(--neon-blue); }
+
+        .host-btn {
+            padding: 8px 20px;
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            background: rgba(255,255,255,0.05);
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .host-btn:hover { background: white; color: black; }
+
+        /* --- VIP SECTION --- */
+        .vip-zone {
+            padding: 80px 20px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            background: linear-gradient(to right, #fff, var(--text-muted));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
-        /* --- VIP SECTION (YOUR ACCOUNTS) --- */
-        .vip-section {
-            padding: 60px 20px;
-            max-width: 1300px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            display: inline-block;
-        }
-
-        .section-title span {
-            color: var(--vip-glow);
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-        }
+        
+        .gold-text { color: var(--neon-gold); text-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
 
         .vip-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
-            margin-bottom: 80px;
         }
 
         .vip-card {
-            background: linear-gradient(145deg, rgba(255, 215, 0, 0.05), rgba(0,0,0,0.4));
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            border-radius: 20px;
-            padding: 30px;
+            background: linear-gradient(160deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.4) 100%);
+            border: 1px solid rgba(255, 215, 0, 0.15); /* Gold border */
+            border-radius: 24px;
+            padding: 35px;
             position: relative;
-            transition: 0.4s;
             overflow: hidden;
-            text-align: left;
+            transition: all 0.4s ease;
         }
 
         .vip-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
-            border-color: var(--vip-glow);
+            border-color: var(--neon-gold);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.1);
         }
 
-        .vip-badge {
+        .status-dot {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--vip-glow);
-            color: #000;
-            font-weight: 800;
-            font-size: 0.7rem;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            color: var(--neon-green);
+            background: rgba(0, 255, 157, 0.1);
             padding: 5px 10px;
             border-radius: 20px;
-            text-transform: uppercase;
+            border: 1px solid rgba(0, 255, 157, 0.2);
         }
 
-        .vip-icon {
+        .status-dot span {
+            width: 8px;
+            height: 8px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+        .vip-icon-box {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 215, 0, 0.05);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 2.5rem;
-            color: var(--vip-glow);
-            margin-bottom: 20px;
+            color: var(--neon-gold);
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 215, 0, 0.1);
         }
 
-        .access-btn {
-            display: block;
+        .launch-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
             width: 100%;
-            padding: 15px;
-            margin-top: 20px;
-            background: var(--vip-glow);
-            color: #000;
-            text-align: center;
-            text-decoration: none;
+            padding: 16px;
+            margin-top: 25px;
+            background: var(--neon-gold);
+            color: black;
             font-weight: 700;
+            text-decoration: none;
             border-radius: 12px;
             transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
         }
-
-        .access-btn:hover {
-            background: white;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-        }
+        
+        .launch-btn:hover { background: white; box-shadow: 0 0 20px var(--neon-gold); }
 
         /* --- DIRECTORY SECTION --- */
-        .directory-section {
-            padding: 40px 20px 100px;
-            max-width: 1300px;
-            margin: 0 auto;
+        .directory {
             border-top: 1px solid var(--glass-border);
+            padding: 60px 20px 100px;
+            background: rgba(0,0,0,0.2);
         }
 
-        /* Search Bar */
-        .search-container {
-            max-width: 700px;
+        .search-wrapper {
+            max-width: 600px;
             margin: 0 auto 50px;
             position: relative;
         }
 
         .search-input {
             width: 100%;
-            padding: 18px 50px;
-            border-radius: 50px;
-            background: var(--glass-bg);
+            padding: 20px 50px;
+            background: rgba(255,255,255,0.03);
             border: 1px solid var(--glass-border);
+            border-radius: 50px;
             color: white;
             font-size: 1.1rem;
             outline: none;
+            transition: 0.3s;
         }
 
         .search-input:focus {
-            border-color: var(--primary);
-            background: rgba(255,255,255,0.05);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
         }
 
-        /* Normal Cards */
-        .grid {
+        .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        .card {
-            background: var(--glass-bg);
+        .tool-card {
+            background: var(--glass-panel);
             border: 1px solid var(--glass-border);
             border-radius: 16px;
             padding: 25px;
@@ -209,168 +270,213 @@
             flex-direction: column;
         }
 
-        .card:hover {
-            background: rgba(255,255,255,0.06);
+        .tool-card:hover {
+            background: rgba(255,255,255,0.05);
             transform: translateY(-5px);
+            border-color: var(--neon-blue);
         }
 
-        .card-header {
+        .tool-header {
             display: flex;
             align-items: center;
             gap: 15px;
             margin-bottom: 15px;
         }
 
-        .icon-box {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.1);
+        .t-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.05);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--secondary);
+            color: var(--neon-blue);
         }
 
-        .card h3 { font-size: 1.1rem; }
-        .card p { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 20px; flex-grow: 1; }
-        
-        .visit-link {
-            color: var(--primary);
+        .tool-tag {
+            font-size: 0.7rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: rgba(0, 242, 254, 0.1);
+            color: var(--neon-blue);
+            margin-left: auto;
+        }
+
+        .tool-link {
+            margin-top: auto;
+            color: var(--text-muted);
             text-decoration: none;
             font-size: 0.9rem;
-            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.3s;
         }
+        
+        .tool-link:hover { color: var(--neon-blue); }
 
+        /* Footer */
         footer {
-            text-align: center;
-            padding: 30px;
-            color: var(--text-gray);
-            font-size: 0.8rem;
             border-top: 1px solid var(--glass-border);
+            padding: 40px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
         }
 
+        /* Responsive */
         @media (max-width: 768px) {
-            .section-title { font-size: 2rem; }
+            .section-header h2 { font-size: 2.2rem; }
             .vip-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-glow bg-glow-1"></div>
-    <div class="bg-glow bg-glow-2"></div>
+    <div class="nebula">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="news-ticker">
+        <div class="ticker-content">
+            <i class="fa-solid fa-bolt"></i> BREAKING: GPT-4o releases new reasoning capabilities... &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
+            <i class="fa-brands fa-google"></i> Gemini 1.5 update enables 1M context window... &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
+            <i class="fa-solid fa-video"></i> Sora AI changes video production forever...
+        </div>
+    </div>
 
     <nav>
-        <div class="logo">AI NEXUS</div>
-        <a href="#" style="color:white; text-decoration:none;"><i class="fa-brands fa-github"></i> &nbsp;GitHub</a>
+        <div class="brand">
+            <i class="fa-solid fa-network-wired"></i> AI NEXUS <span style="font-size:0.8rem; background:var(--neon-gold); color:black; padding:2px 6px; border-radius:4px; margin-left:5px;">ULTIMATE</span>
+        </div>
+        <a href="https://github.com" target="_blank" class="host-btn">
+            <i class="fa-brands fa-github"></i> Host This
+        </a>
     </nav>
 
-    <section class="vip-section">
-        <h2 class="section-title">Premium Access <span>Unlocked</span></h2>
-        <p style="color:var(--text-gray); margin-bottom: 40px;">
-            Enjoy free access to world-class AI models through our community hub.
-        </p>
+    <section class="vip-zone">
+        <div class="section-header">
+            <h2>Command <span class="gold-text">Center</span></h2>
+            <p style="color:#94a3b8; margin-top:10px;">Direct access to your premium neural networks</p>
+        </div>
 
         <div class="vip-grid">
             <div class="vip-card">
-                <span class="vip-badge">Premium</span>
-                <i class="fa-solid fa-bolt vip-icon"></i>
-                <h3>ChatGPT 4o</h3>
-                <p style="color:#ccc; margin:10px 0;">Access the smartest model by OpenAI. Full reasoning and creative capabilities enabled.</p>
+                <div class="status-dot"><span></span> Online</div>
+                <div class="vip-icon-box">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <h3 style="font-size:1.5rem; margin-bottom:5px;">ChatGPT 4o</h3>
+                <p style="color:#aaa; font-size:0.95rem;">OpenAI's flagship model. Unlocked for advanced reasoning.</p>
                 
-                <a href="YOUR_CHATGPT_LINK_HERE" target="_blank" class="access-btn">
-                    Launch GPT-4o <i class="fa-solid fa-rocket"></i>
+                <a href="YOUR_CHATGPT_LINK_HERE" class="launch-btn">
+                    Initialize System <i class="fa-solid fa-power-off"></i>
                 </a>
             </div>
 
             <div class="vip-card">
-                <span class="vip-badge">Pro 1.5</span>
-                <i class="fa-brands fa-google vip-icon"></i>
-                <h3>Gemini Advanced</h3>
-                <p style="color:#ccc; margin:10px 0;">Google's most capable AI. Multi-modal processing for text, images, and code.</p>
+                <div class="status-dot"><span></span> Online</div>
+                <div class="vip-icon-box">
+                    <i class="fa-brands fa-google"></i>
+                </div>
+                <h3 style="font-size:1.5rem; margin-bottom:5px;">Gemini Ultra</h3>
+                <p style="color:#aaa; font-size:0.95rem;">Google's multimodal intelligence engine. Vision & Code enabled.</p>
                 
-                <a href="YOUR_GEMINI_LINK_HERE" target="_blank" class="access-btn">
-                    Launch Gemini <i class="fa-solid fa-rocket"></i>
+                <a href="YOUR_GEMINI_LINK_HERE" class="launch-btn">
+                    Initialize System <i class="fa-solid fa-power-off"></i>
                 </a>
             </div>
 
             <div class="vip-card">
-                <span class="vip-badge">Pro Search</span>
-                <i class="fa-solid fa-magnifying-glass-chart vip-icon"></i>
-                <h3>Perplexity AI</h3>
-                <p style="color:#ccc; margin:10px 0;">Real-time search engine capability with deep research and citation features.</p>
+                <div class="status-dot"><span></span> Online</div>
+                <div class="vip-icon-box">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                </div>
+                <h3 style="font-size:1.5rem; margin-bottom:5px;">Perplexity Pro</h3>
+                <p style="color:#aaa; font-size:0.95rem;">Real-time web synthesis and deep research assistant.</p>
                 
-                <a href="YOUR_PERPLEXITY_LINK_HERE" target="_blank" class="access-btn">
-                    Launch Perplexity <i class="fa-solid fa-rocket"></i>
+                <a href="YOUR_PERPLEXITY_LINK_HERE" class="launch-btn">
+                    Initialize System <i class="fa-solid fa-power-off"></i>
                 </a>
             </div>
         </div>
     </section>
 
-
-    <section class="directory-section">
-        <div style="text-align:center; margin-bottom:30px;">
-            <h2>Explore Other Tools</h2>
-            <p style="color:var(--text-gray);">Browse the full collection of AI resources</p>
+    <section class="directory">
+        <div class="section-header" style="margin-bottom:30px;">
+            <h2 style="font-size:2rem;">Global Tool <span style="color:var(--neon-blue);">Index</span></h2>
         </div>
 
-        <div class="search-container">
-            <input type="text" id="searchInput" class="search-input" placeholder="Search any AI tool...">
-            <i class="fa-solid fa-search" style="position:absolute; right:20px; top:20px; color:#aaa;"></i>
+        <div class="search-wrapper">
+            <i class="fa-solid fa-search" style="position:absolute; left:20px; top:50%; transform:translateY(-50%); color:#64748b;"></i>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search the database (e.g. Video, Code, Audio)...">
         </div>
 
-        <div class="grid" id="aiGrid">
+        <div class="tools-grid" id="toolsGrid">
             </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 AI Nexus Community. Built for Everyone.</p>
+        <p>&copy; 2026 AI Nexus Ultimate. Engineered for the Future.</p>
     </footer>
 
     <script>
-        // Database of Normal Tools
-        const aiTools = [
-            { name: "Midjourney", cat: "Image", desc: "Generate hyper-realistic art via Discord.", url: "https://midjourney.com", icon: "fa-paintbrush" },
-            { name: "Runway ML", cat: "Video", desc: "Advanced video generation and editing suite.", url: "https://runwayml.com", icon: "fa-video" },
-            { name: "GitHub Copilot", cat: "Code", desc: "Your AI pair programmer.", url: "https://github.com/features/copilot", icon: "fa-github" },
-            { name: "ElevenLabs", cat: "Audio", desc: "Realistic AI voice generator.", url: "https://elevenlabs.io", icon: "fa-microphone" },
-            { name: "Claude 3", cat: "Chat", desc: "Anthropic's helpful and honest AI assistant.", url: "https://claude.ai", icon: "fa-robot" },
-            { name: "Sora", cat: "Video", desc: "Text-to-video model by OpenAI.", url: "https://openai.com/sora", icon: "fa-film" },
-            { name: "Leonardo.ai", cat: "Image", desc: "Creative studio for AI art generation.", url: "https://leonardo.ai", icon: "fa-palette" },
-            { name: "Replit", cat: "Code", desc: "Collaborative browser-based IDE with AI.", url: "https://replit.com", icon: "fa-code" }
+        // === DATABASE ===
+        const database = [
+            { name: "Midjourney v6", tag: "Image", desc: "Generative art engine.", icon: "fa-palette", url: "https://midjourney.com" },
+            { name: "Runway Gen-3", tag: "Video", desc: "Cinematic video creation.", icon: "fa-film", url: "https://runwayml.com" },
+            { name: "GitHub Copilot", tag: "Code", desc: "AI pair programmer.", icon: "fa-github", url: "https://github.com/features/copilot" },
+            { name: "ElevenLabs", tag: "Audio", desc: "Voice synthesis & cloning.", icon: "fa-microphone-lines", url: "https://elevenlabs.io" },
+            { name: "Claude 3", tag: "Chat", desc: "High-context assistant.", icon: "fa-brain", url: "https://claude.ai" },
+            { name: "Sora", tag: "Video", desc: "Text-to-video simulation.", icon: "fa-video", url: "https://openai.com/sora" },
+            { name: "Leonardo.ai", tag: "Image", desc: "Creative asset production.", icon: "fa-image", url: "https://leonardo.ai" },
+            { name: "Cursor", tag: "Code", desc: "AI-first code editor.", icon: "fa-laptop-code", url: "https://cursor.sh" },
+            { name: "Suno", tag: "Music", desc: "Make music with AI.", icon: "fa-music", url: "https://suno.ai" },
+            { name: "HuggingFace", tag: "Dev", desc: "The AI community hub.", icon: "fa-face-smile", url: "https://huggingface.co" }
         ];
 
-        const grid = document.getElementById('aiGrid');
+        const grid = document.getElementById('toolsGrid');
         const searchInput = document.getElementById('searchInput');
 
-        function renderCards(tools) {
+        function renderTools(data) {
             grid.innerHTML = '';
-            tools.forEach(tool => {
-                grid.innerHTML += `
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="icon-box"><i class="fa-solid ${tool.icon}"></i></div>
+            data.forEach(item => {
+                const card = `
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="t-icon"><i class="fa-solid ${item.icon}"></i></div>
                             <div>
-                                <h3>${tool.name}</h3>
-                                <span style="font-size:0.75rem; color:var(--secondary);">${tool.cat}</span>
+                                <h4 style="font-size:1.1rem;">${item.name}</h4>
                             </div>
+                            <span class="tool-tag">${item.tag}</span>
                         </div>
-                        <p>${tool.desc}</p>
-                        <a href="${tool.url}" target="_blank" class="visit-link">Visit Official Site &rarr;</a>
+                        <p style="color:#94a3b8; font-size:0.9rem; margin-bottom:15px;">${item.desc}</p>
+                        <a href="${item.url}" target="_blank" class="tool-link">
+                            Access Tool <i class="fa-solid fa-arrow-right"></i>
+                        </a>
                     </div>
                 `;
+                grid.innerHTML += card;
             });
         }
 
+        // Live Search
         searchInput.addEventListener('input', (e) => {
             const val = e.target.value.toLowerCase();
-            const filtered = aiTools.filter(t => t.name.toLowerCase().includes(val) || t.desc.toLowerCase().includes(val));
-            renderCards(filtered);
+            const filtered = database.filter(item => 
+                item.name.toLowerCase().includes(val) || 
+                item.tag.toLowerCase().includes(val) ||
+                item.desc.toLowerCase().includes(val)
+            );
+            renderTools(filtered);
         });
 
-        // Init
-        renderCards(aiTools);
+        // Initialize
+        renderTools(database);
+
     </script>
 </body>
 </html>
