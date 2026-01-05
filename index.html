@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Universe - The Ultimate AI Directory</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        /* --- CSS STYLES --- */
+        :root {
+            --primary-color: #00f2fe;
+            --secondary-color: #4facfe;
+            --accent-color: #ff0055;
+            --bg-color: #080a10;
+            --card-bg: rgba(22, 27, 46, 0.7);
+            --text-white: #ffffff;
+            --text-gray: #a0a0a0;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-white);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(79, 172, 254, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 0, 85, 0.08) 0%, transparent 20%);
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(8, 10, 16, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .submit-btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            color: #000;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero span {
+            color: var(--secondary-color);
+        }
+
+        .hero p {
+            color: var(--text-gray);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* Search & Filter Bar */
+        .controls {
+            max-width: 900px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .search-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .search-wrapper input {
+            width: 100%;
+            padding: 18px 50px;
+            border-radius: 50px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .search-wrapper input:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 20px rgba(79, 172, 254, 0.15);
+        }
+
+        .search-wrapper i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-gray);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-gray);
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--secondary-color);
+            color: #000;
+            font-weight: 600;
+            border-color: var(--secondary-color);
+        }
+
+        /* Grid Layout */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        /* Card Design */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 25px;
+            transition: 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 20px;
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+        }
+
+        .category-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 5px 12px;
+            border-radius: 10px;
+            background: rgba(79, 172, 254, 0.1);
+            color: var(--secondary-color);
+            border: 1px solid rgba(79, 172, 254, 0.2);
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .visit-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px;
+            background: var(--text-white);
+            color: #000;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .visit-btn:hover {
+            background: var(--primary-color);
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-gray);
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <i class="fa-solid fa-atom"></i> AI Universe
+        </div>
+        <a href="https://github.com/login" target="_blank" class="submit-btn">
+            <i class="fa-brands fa-github"></i> Host This
+        </a>
+    </nav>
+
+    <section class="hero">
+        <h1>Discover the Future of <br><span>Artificial Intelligence</span></h1>
+        <p>A curated library of the most powerful AI tools available today. Updated daily.</p>
+    </section>
+
+    <section class="controls">
+        <div class="search-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Search for tools (e.g. Gemini, Coding, Video)...">
+        </div>
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterAI('all')">All Tools</button>
+            <button class="filter-btn" onclick="filterAI('Chat')">ChatBots</button>
+            <button class="filter-btn" onclick="filterAI('Image')">Image Gen</button>
+            <button class="filter-btn" onclick="filterAI('Video')">Video</button>
+            <button class="filter-btn" onclick="filterAI('Code')">Coding</button>
+            <button class="filter-btn" onclick="filterAI('Productivity')">Productivity</button>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="grid" id="aiGrid">
+            </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 AI Universe. Designed for the Future.</p>
+    </footer>
+
+    <script>
+        // === 1. DATABASE (ඔබට අවශ්‍ය දත්ත මෙතනට ඇතුලත් කරන්න) ===
+        const aiTools = [
+            {
+                name: "ChatGPT",
+                category: "Chat",
+                desc: "OpenAI's industry-leading conversational AI model for writing, coding, and assistance.",
+                url: "https://chat.openai.com",
+                icon: "fa-solid fa-message"
+            },
+            {
+                name: "Gemini",
+                category: "Chat",
+                desc: "Google's multimodal AI. Capable of understanding text, images, video, and audio.",
+                url: "https://gemini.google.com",
+                icon: "fa-brands fa-google"
+            },
+            {
+                name: "Midjourney",
+                category: "Image",
+                desc: "The gold standard for artistic AI image generation via Discord prompts.",
+                url: "https://www.midjourney.com",
+                icon: "fa-solid fa-paintbrush"
+            },
+            {
+                name: "GitHub Copilot",
+                category: "Code",
+                desc: "Your AI pair programmer. Turns natural language prompts into coding suggestions.",
+                url: "https://github.com/features/copilot",
+                icon: "fa-brands fa-github"
+            },
+            {
+                name: "Runway Gen-2",
+                category: "Video",
+                desc: "Turn text into video. A complete AI video editing and generation suite.",
+                url: "https://runwayml.com",
+                icon: "fa-solid fa-film"
+            },
+            {
+                name: "Notion AI",
+                category: "Productivity",
+                desc: "Integrated AI assistant for notes, docs, and project management workspaces.",
+                url: "https://www.notion.so/product/ai",
+                icon: "fa-solid fa-bolt"
+            },
+            {
+                name: "Leonardo.ai",
+                category: "Image",
+                desc: "Generate production-quality assets for creative projects with high control.",
+                url: "https://leonardo.ai",
+                icon: "fa-solid fa-palette"
+            },
+            {
+                name: "Claude 3",
+                category: "Chat",
+                desc: "Anthropic's secure and high-context window AI for enterprise tasks.",
+                url: "https://claude.ai",
+                icon: "fa-solid fa-robot"
+            },
+            {
+                name: "ElevenLabs",
+                category: "Productivity",
+                desc: "The most realistic AI voice generator and text-to-speech software.",
+                url: "https://elevenlabs.io",
+                icon: "fa-solid fa-microphone-lines"
+            },
+            {
+                name: "Sora",
+                category: "Video",
+                desc: "OpenAI's text-to-video model that can create realistic and imaginative scenes.",
+                url: "https://openai.com/sora",
+                icon: "fa-solid fa-video"
+            },
+            {
+                name: "Replit Ghostwriter",
+                category: "Code",
+                desc: "An AI-powered pair programmer built directly into the Replit online IDE.",
+                url: "https://replit.com",
+                icon: "fa-solid fa-code"
+            },
+            {
+                name: "Canva Magic",
+                category: "Image",
+                desc: "AI design tools integrated into Canva for instant image editing and generation.",
+                url: "https://www.canva.com",
+                icon: "fa-solid fa-pen-nib"
+            }
+        ];
+
+        const grid = document.getElementById('aiGrid');
+        const searchInput = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        // === 2. Function to Render Cards ===
+        function displayTools(tools) {
+            grid.innerHTML = '';
+            
+            if (tools.length === 0) {
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-gray);">No AI tools found matching your search.</div>';
+                return;
+            }
+
+            tools.forEach(tool => {
+                const cardHTML = `
+                    <div class="card">
+                        <div class="card-top">
+                            <div class="icon-box">
+                                <i class="${tool.icon}"></i>
+                            </div>
+                            <span class="category-tag">${tool.category}</span>
+                        </div>
+                        <h3>${tool.name}</h3>
+                        <p>${tool.desc}</p>
+                        <a href="${tool.url}" target="_blank" class="visit-btn">
+                            Visit Website <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                `;
+                grid.innerHTML += cardHTML;
+            });
+        }
+
+        // === 3. Filtering Logic ===
+        function filterAI(category) {
+            // Button Styles
+            filterBtns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Data Filter
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            const filteredDocs = aiTools.filter(tool => {
+                const matchCat = category === 'all' || tool.category === category;
+                const matchSearch = tool.name.toLowerCase().includes(searchTerm) || 
+                                    tool.desc.toLowerCase().includes(searchTerm);
+                return matchCat && matchSearch;
+            });
+
+            displayTools(filteredDocs);
+        }
+
+        // === 4. Search Logic ===
+        searchInput.addEventListener('input', (e) => {
+            const activeBtn = document.querySelector('.filter-btn.active');
+            // Extract category from button text mapping
+            let currentCat = activeBtn.innerText;
+            
+            // Map Button Text to Category Key
+            if(currentCat === 'All Tools') currentCat = 'all';
+            else if(currentCat === 'ChatBots') currentCat = 'Chat';
+            else if(currentCat === 'Image Gen') currentCat = 'Image';
+            
+            // If the category name matches exactly (Video, Code) keep it, else clean it
+            if(!['all', 'Chat', 'Image'].includes(currentCat)) {
+                 currentCat = currentCat; 
+            }
+
+            const searchTerm = e.target.value.toLowerCase();
+
+            const filteredDocs = aiTools.filter(tool => {
+                const matchCat = currentCat === 'all' || tool.category === currentCat;
+                const matchSearch = tool.name.toLowerCase().includes(searchTerm) || 
+                                    tool.desc.toLowerCase().includes(searchTerm);
+                return matchCat && matchSearch;
+            });
+
+            displayTools(filteredDocs);
+        });
+
+        // Initialize
+        displayTools(aiTools);
+
+    </script>
+</body>
+</html>
