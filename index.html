@@ -3,543 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Nexus Pro | Premium AI Directory</title>
+    <title>AI Hub - Free Access</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
     <style>
-        /* --- PREMIUM CSS VARIABLES --- */
         :root {
-            --bg-dark: #030014;
-            --card-glass: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --primary-glow: #7000ff;
-            --secondary-glow: #00c6ff;
-            --text-main: #ffffff;
-            --text-muted: #9ca3af;
+            --bg-color: #0f172a;
+            --sidebar-bg: #1e293b;
+            --chat-bg: #0f172a;
+            --msg-user: #3b82f6;
+            --msg-ai: #334155;
+            --text-color: #f8fafc;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            overflow-x: hidden;
-            min-height: 100vh;
-            position: relative;
-        }
-
-        /* --- BACKGROUND ANIMATION --- */
-        .background-blobs {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
+            display: flex;
+            height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             overflow: hidden;
         }
 
-        .blob {
-            position: absolute;
-            filter: blur(80px);
-            opacity: 0.4;
-            border-radius: 50%;
-            animation: float 10s infinite alternate;
-        }
-
-        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--primary-glow); }
-        .blob-2 { bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: var(--secondary-glow); animation-delay: -5s; }
-
-        @keyframes float {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(30px, 50px); }
-        }
-
-        /* --- NAVBAR --- */
-        nav {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 1200px;
-            background: rgba(15, 15, 25, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 15px 30px;
-            border-radius: 50px;
-            border: 1px solid var(--card-border);
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background-color: var(--sidebar-bg);
+            padding: 20px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            flex-direction: column;
+            border-right: 1px solid rgba(255,255,255,0.1);
         }
 
         .logo {
             font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #fff 0%, #a5a5a5 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: white;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .nav-btn {
-            background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
-            border: none;
-            padding: 10px 25px;
-            border-radius: 30px;
-            color: white;
-            font-weight: 600;
-            font-size: 0.9rem;
+        .model-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 10px;
             cursor: pointer;
+            text-align: left;
             transition: 0.3s;
-            text-decoration: none;
-        }
-
-        .nav-btn:hover {
-            opacity: 0.9;
-            box-shadow: 0 0 20px rgba(112, 0, 255, 0.4);
-        }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            text-align: center;
-            padding: 180px 20px 60px;
-            position: relative;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            line-height: 1.1;
-            font-weight: 800;
-            margin-bottom: 20px;
-            background: linear-gradient(to right, #fff, #b0b0b0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(255,255,255,0.1);
-        }
-
-        .hero h1 span {
-            background: linear-gradient(to right, var(--secondary-glow), var(--primary-glow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
-
-        /* --- SEARCH & FILTERS --- */
-        .controls-container {
-            max-width: 800px;
-            margin: 0 auto 60px;
-            padding: 0 20px;
-        }
-
-        .search-bar {
-            position: relative;
-            margin-bottom: 25px;
-        }
-
-        .search-bar input {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--card-border);
-            padding: 20px 60px;
-            border-radius: 20px;
-            color: white;
-            font-size: 1.1rem;
-            backdrop-filter: blur(10px);
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .search-bar input:focus {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--secondary-glow);
-            box-shadow: 0 0 20px rgba(0, 198, 255, 0.2);
-        }
-
-        .search-bar i {
-            position: absolute;
-            left: 25px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 1.2rem;
-        }
-
-        .filters {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--card-border);
-            color: var(--text-muted);
-            padding: 10px 24px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border-color: var(--secondary-glow);
-            box-shadow: 0 0 15px rgba(0, 198, 255, 0.2);
-        }
-
-        /* --- GRID SYSTEM --- */
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 20px 100px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 30px;
-        }
-
-        /* --- HIGH CLASS CARD DESIGN --- */
-        .card {
-            background: var(--card-glass);
-            border: 1px solid var(--card-border);
-            border-radius: 24px;
-            padding: 30px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(10px);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: rgba(255,255,255,0.2);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-        }
-
-        /* Neon Glow on Hover */
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
-            opacity: 0;
-            transition: 0.3s;
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 20px;
-        }
-
-        .icon-wrapper {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.01));
-            border-radius: 16px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
+            gap: 10px;
+        }
+
+        .model-btn:hover, .model-btn.active {
+            background: #3b82f6;
             color: white;
-            border: 1px solid rgba(255,255,255,0.1);
+            border-color: #3b82f6;
         }
 
-        .badge {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 6px 12px;
-            border-radius: 20px;
-            background: rgba(112, 0, 255, 0.15);
-            color: #d8b4fe;
-            border: 1px solid rgba(112, 0, 255, 0.3);
-            font-weight: 700;
+        /* Chat Area */
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
         }
 
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 25px;
-            flex-grow: 1;
-        }
-
-        .visit-btn {
-            display: block;
-            text-align: center;
-            background: rgba(255,255,255,0.05);
-            color: white;
-            text-decoration: none;
-            padding: 14px;
-            border-radius: 16px;
+        .chat-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             font-weight: 600;
-            transition: 0.3s;
-            border: 1px solid var(--card-border);
         }
 
-        .visit-btn:hover {
-            background: white;
-            color: black;
-            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+        .chat-box {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        /* --- FOOTER --- */
-        footer {
-            border-top: 1px solid var(--card-border);
-            text-align: center;
-            padding: 40px;
-            color: var(--text-muted);
-            background: rgba(0,0,0,0.3);
+        .message {
+            max-width: 70%;
+            padding: 12px 18px;
+            border-radius: 15px;
+            line-height: 1.5;
+            font-size: 0.95rem;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            nav { width: 95%; padding: 15px 20px; }
-            .grid { grid-template-columns: 1fr; }
+        .user-msg {
+            align-self: flex-end;
+            background-color: var(--msg-user);
+            color: white;
+            border-bottom-right-radius: 2px;
         }
+
+        .ai-msg {
+            align-self: flex-start;
+            background-color: var(--msg-ai);
+            color: #e2e8f0;
+            border-bottom-left-radius: 2px;
+        }
+
+        /* Input Area */
+        .input-area {
+            padding: 20px;
+            background-color: var(--sidebar-bg);
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-area input {
+            flex: 1;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: #0f172a;
+            color: white;
+            outline: none;
+        }
+
+        .send-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="background-blobs">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
+    <div class="sidebar">
+        <div class="logo"><i class="fa-solid fa-robot"></i> AI Hub Pro</div>
+        
+        <p style="color:#64748b; font-size:0.8rem; margin-bottom:10px;">SELECT MODEL</p>
+        
+        <button class="model-btn active" onclick="selectModel('GPT-4o')">
+            <i class="fa-solid fa-bolt"></i> ChatGPT 4o
+        </button>
+        <button class="model-btn" onclick="selectModel('Gemini Pro')">
+            <i class="fa-brands fa-google"></i> Gemini Pro 1.5
+        </button>
+        <button class="model-btn" onclick="selectModel('Perplexity')">
+            <i class="fa-solid fa-search"></i> Perplexity
+        </button>
     </div>
 
-    <nav>
-        <div class="logo">
-            <i class="fa-solid fa-layer-group" style="color: var(--secondary-glow)"></i> AI NEXUS
-        </div>
-        <a href="https://github.com/your-repo" target="_blank" class="nav-btn">
-            <i class="fa-brands fa-github"></i> Host on GitHub
-        </a>
-    </nav>
-
-    <section class="hero">
-        <h1>Unlock the Power of <br><span>Next-Gen AI</span></h1>
-        <p>A curated universe of the world's most advanced Artificial Intelligence tools. Designed for creators, developers, and visionaries.</p>
-    </section>
-
-    <section class="controls-container">
-        <div class="search-bar">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="Search AI tools (e.g. Gemini, Video, Coding)...">
-        </div>
-        <div class="filters">
-            <button class="filter-btn active" onclick="filterAI('all')">All</button>
-            <button class="filter-btn" onclick="filterAI('Chat')">ChatBots</button>
-            <button class="filter-btn" onclick="filterAI('Image')">Image Gen</button>
-            <button class="filter-btn" onclick="filterAI('Video')">Video</button>
-            <button class="filter-btn" onclick="filterAI('Code')">Coding</button>
-            <button class="filter-btn" onclick="filterAI('Audio')">Audio</button>
-        </div>
-    </section>
-
-    <div class="container">
-        <div class="grid" id="aiGrid">
+    <div class="chat-container">
+        <div class="chat-header" id="headerTitle">Current Model: ChatGPT 4o</div>
+        
+        <div class="chat-box" id="chatBox">
+            <div class="message ai-msg">
+                Hello! I am connected to your premium AI accounts. Select a model from the left and ask me anything.
             </div>
-    </div>
+        </div>
 
-    <footer>
-        <p>© 2026 AI Nexus Pro. Crafted with precision.</p>
-    </footer>
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="Type your message here...">
+            <button class="send-btn" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
 
     <script>
-        // High Class Data Set
-        const aiTools = [
-            {
-                name: "ChatGPT 4o",
-                category: "Chat",
-                desc: "The latest flagship model from OpenAI. Faster, smarter, and multimodal capabilities.",
-                url: "https://chat.openai.com",
-                icon: "fa-solid fa-bolt"
-            },
-            {
-                name: "Gemini Advanced",
-                category: "Chat",
-                desc: "Google’s most capable AI. Seamlessly integrates with the Google ecosystem.",
-                url: "https://gemini.google.com",
-                icon: "fa-brands fa-google"
-            },
-            {
-                name: "Midjourney v6",
-                category: "Image",
-                desc: "Unmatched photorealism and artistic control for generating images via prompts.",
-                url: "https://www.midjourney.com",
-                icon: "fa-solid fa-paintbrush"
-            },
-            {
-                name: "GitHub Copilot",
-                category: "Code",
-                desc: "The world's most widely adopted AI developer tool. Code faster with confidence.",
-                url: "https://github.com/features/copilot",
-                icon: "fa-brands fa-github"
-            },
-            {
-                name: "Runway Gen-3",
-                category: "Video",
-                desc: "Cinematic video generation. Create realistic video clips from text descriptions.",
-                url: "https://runwayml.com",
-                icon: "fa-solid fa-film"
-            },
-            {
-                name: "Claude 3 Opus",
-                category: "Chat",
-                desc: "Strong reasoning, math, and coding capabilities with a massive context window.",
-                url: "https://claude.ai",
-                icon: "fa-solid fa-brain"
-            },
-            {
-                name: "ElevenLabs",
-                category: "Audio",
-                desc: "The most realistic AI voice generator. Clone voices and generate speech instantly.",
-                url: "https://elevenlabs.io",
-                icon: "fa-solid fa-microphone-lines"
-            },
-            {
-                name: "Sora",
-                category: "Video",
-                desc: "OpenAI's groundbreaking text-to-video model enabling complex camera motions.",
-                url: "https://openai.com/sora",
-                icon: "fa-solid fa-video"
-            },
-            {
-                name: "Perplexity",
-                category: "Chat",
-                desc: "A conversational search engine that gives you accurate answers with sources.",
-                url: "https://www.perplexity.ai",
-                icon: "fa-solid fa-magnifying-glass-chart"
-            },
-             {
-                name: "Cursor",
-                category: "Code",
-                desc: "The AI-first code editor. Built to make pair programming with AI seamless.",
-                url: "https://cursor.sh",
-                icon: "fa-solid fa-laptop-code"
-            }
-        ];
+        let currentModel = 'GPT-4o';
 
-        const grid = document.getElementById('aiGrid');
-        const searchInput = document.getElementById('searchInput');
-        const filterBtns = document.querySelectorAll('.filter-btn');
-
-        function renderTools(tools) {
-            grid.innerHTML = '';
+        function selectModel(model) {
+            currentModel = model;
+            document.getElementById('headerTitle').innerText = `Current Model: ${model}`;
             
-            if(tools.length === 0) {
-                grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:50px; color:rgba(255,255,255,0.5);">No results found.</div>';
-                return;
-            }
-
-            tools.forEach((tool, index) => {
-                // Staggered Animation Delay
-                const delay = index * 100;
-                
-                const card = `
-                    <div class="card" style="animation: fadeUp 0.6s ease forwards ${delay}ms; opacity: 0; transform: translateY(20px);">
-                        <div class="card-header">
-                            <div class="icon-wrapper">
-                                <i class="${tool.icon}"></i>
-                            </div>
-                            <span class="badge">${tool.category}</span>
-                        </div>
-                        <h3>${tool.name}</h3>
-                        <p>${tool.desc}</p>
-                        <a href="${tool.url}" target="_blank" class="visit-btn">
-                            Visit Site <i class="fa-solid fa-arrow-right-long" style="margin-left:5px;"></i>
-                        </a>
-                    </div>
-                `;
-                grid.innerHTML += card;
-            });
+            // Highlight active button
+            document.querySelectorAll('.model-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            
+            // Optional: Clear chat or show model switch message
+            addMessage('ai', `Switched to ${model}. How can I help?`);
         }
 
-        // Add Keyframes for JS animation
-        const styleSheet = document.createElement("style");
-        styleSheet.innerText = `
-            @keyframes fadeUp {
-                to { opacity: 1; transform: translateY(0); }
-            }
-        `;
-        document.head.appendChild(styleSheet);
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const text = input.value.trim();
+            if (!text) return;
 
-        function filterAI(category) {
-            filterBtns.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            // 1. Show User Message
+            addMessage('user', text);
+            input.value = '';
 
-            const searchTerm = searchInput.value.toLowerCase();
-            const filtered = aiTools.filter(tool => {
-                const matchCat = category === 'all' || tool.category === category;
-                const matchSearch = tool.name.toLowerCase().includes(searchTerm) || 
-                                    tool.desc.toLowerCase().includes(searchTerm);
-                return matchCat && matchSearch;
-            });
-            renderTools(filtered);
+            // 2. Simulate AI Response (Here you need API connection)
+            showTypingIndicator();
+
+            setTimeout(() => {
+                // ME TIKATA THAMAI API CONNECT KARANNA ONE
+                let response = "";
+                if(currentModel === 'GPT-4o') response = "This is a simulated response from ChatGPT 4o.";
+                else if(currentModel === 'Gemini Pro') response = "This is a simulated response from Gemini Pro.";
+                else response = "This is a simulated response from Perplexity.";
+
+                removeTypingIndicator();
+                addMessage('ai', response);
+            }, 1500);
         }
 
-        searchInput.addEventListener('input', (e) => {
-            const activeCat = document.querySelector('.filter-btn.active').innerText;
-            // Simple mapping - in a real app this would be cleaner
-            let catKey = activeCat === 'All' ? 'all' : 
-                         activeCat === 'ChatBots' ? 'Chat' : 
-                         activeCat === 'Image Gen' ? 'Image' : activeCat;
+        function addMessage(sender, text) {
+            const box = document.getElementById('chatBox');
+            const div = document.createElement('div');
+            div.className = `message ${sender}-msg`;
+            div.innerText = text;
+            box.appendChild(div);
+            box.scrollTop = box.scrollHeight;
+        }
 
-            const searchTerm = e.target.value.toLowerCase();
-            const filtered = aiTools.filter(tool => {
-                const matchCat = catKey === 'all' || tool.category === catKey;
-                const matchSearch = tool.name.toLowerCase().includes(searchTerm) || 
-                                    tool.desc.toLowerCase().includes(searchTerm);
-                return matchCat && matchSearch;
-            });
-            renderTools(filtered);
+        function showTypingIndicator() {
+            const box = document.getElementById('chatBox');
+            const div = document.createElement('div');
+            div.className = 'message ai-msg';
+            div.id = 'typing';
+            div.innerText = 'Thinking...';
+            box.appendChild(div);
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const typing = document.getElementById('typing');
+            if(typing) typing.remove();
+        }
+
+        // Allow Enter key to send
+        document.getElementById('userInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') sendMessage();
         });
-
-        // Initial Render
-        renderTools(aiTools);
-
     </script>
 </body>
 </html>
